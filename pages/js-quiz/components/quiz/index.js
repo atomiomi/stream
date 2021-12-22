@@ -24,7 +24,7 @@ const Quiz = ({ questions, mode, onSuccess, onFail }) => {
       `}</style>
 
       <header>
-        <Timer time={mode.questionTime} />
+        <Timer time={mode.questionTime} onEnd={onFail} />
       </header>
 
       <div className={styles.card}>

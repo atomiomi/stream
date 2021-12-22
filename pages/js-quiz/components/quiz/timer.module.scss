@@ -3,3 +3,12 @@
   font-size: 64px;
   margin: 0 0 25px 0;
 }
+
+.isEnding {
+  animation: blinker 1s linear infinite;
+  color: #EA0909;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}

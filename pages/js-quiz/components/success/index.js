@@ -1,6 +1,7 @@
+import { format } from 'date-fns';
 import styles from './index.module.scss';
 
-const Success = ({ time }) => {
+const Success = ({ time, onRestart }) => {
   return (
     <article className={styles.root}>
       <style jsx global>{`
@@ -10,7 +11,9 @@ const Success = ({ time }) => {
       `}</style>
 
       <h1 className={`ui-pixel-title ${styles.title}`}>YOU WON!!!</h1>
-      Your time: 23min
+      <div>Your time: { format(time, `m 'minutes' s 'seconds'`) }</div>
+
+      <span className={`ui-game_link ${styles.restart}`} onClick={onRestart}>Play again</span>
     </article>
   );
 };

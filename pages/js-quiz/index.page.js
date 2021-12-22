@@ -38,9 +38,14 @@ const sampleQuestions = [
 
 const JSQuiz = () => {
   const modeRef = useRef();
+  const startTimeRef = useRef();
+  const endTimeRef = useRef();
   const [state, setState] = useState(STATE_START);
 
+  const playingTime = endTimeRef.current - startTimeRef.current;
+
   const handleSucess = () => {
+    endTimeRef.current = Date.now();
     setState(STATE_SUCCESS);
   };
 
@@ -54,6 +59,7 @@ const JSQuiz = () => {
 
   const handleModeSelect = (mode) => {
     modeRef.current = mode;
+    startTimeRef.current = Date.now();
     setState(STATE_QUIZ);
   };
 
@@ -76,7 +82,7 @@ const JSQuiz = () => {
       <div className={styles.content}>
         {state === STATE_START && <Start onModeSelect={handleModeSelect} />}
         {state === STATE_QUIZ && <Quiz mode={modeRef.current} questions={sampleQuestions} onSuccess={handleSucess} onFail={handleFail} />}
-        {state === STATE_SUCCESS && <Success />}
+        {state === STATE_SUCCESS && <Success onRestart={handleRestart} time={playingTime} />}
         {state === STATE_FAIL && <GameOver onRestart={handleRestart} />}
       </div>
 
