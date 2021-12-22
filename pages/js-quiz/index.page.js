@@ -75,7 +75,7 @@ const JSQuiz = () => {
 
       <div className={styles.content}>
         {state === STATE_START && <Start onModeSelect={handleModeSelect} />}
-        {state === STATE_QUIZ && <Quiz questions={sampleQuestions} onSuccess={handleSucess} onFail={handleFail} />}
+        {state === STATE_QUIZ && <Quiz mode={modeRef.current} questions={sampleQuestions} onSuccess={handleSucess} onFail={handleFail} />}
         {state === STATE_SUCCESS && <Success />}
         {state === STATE_FAIL && <GameOver onRestart={handleRestart} />}
       </div>
