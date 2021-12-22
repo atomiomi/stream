@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import styles from './index.module.scss';
 
-const COLOR_BG = '#FFD772';
-
 const Quiz = ({ questions, onSuccess, onFail }) => {
   const [index, setIndex] = useState(0);
   const question = questions[index];
@@ -20,7 +18,7 @@ const Quiz = ({ questions, onSuccess, onFail }) => {
     <article>
       <style jsx global>{`
         body {
-          background-color: ${COLOR_BG};
+          background-color: #FFD772;
         }
       `}</style>
 

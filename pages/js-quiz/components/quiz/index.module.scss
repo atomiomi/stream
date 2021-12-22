@@ -3,7 +3,7 @@
 .card {
   margin: 0 auto;
   padding: 15px;
-  max-width: 490px;
+  max-width: 550px;
   background-color: #4F4646;
   border-radius: 10px;
   box-shadow: 0px 2px 44px 10px rgba(0, 0, 0, 0.2);
@@ -32,19 +32,39 @@
   padding: 5px;
   cursor: pointer;
   border-radius: 8px;
-  transition: background-color 300ms ease;
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+  word-break: break-all;
 
   i {
+    flex-shrink: 0;
     display: inline-block;
+    vertical-align: center;
+    text-align: center;
+    line-height: 27px;
     background: white;
     width: 27px;
     height: 27px;
     border-radius:27px;
     margin-right: 12px;
+    font-style: normal;
   }
 
   &:hover {
     background-color: #423F3F;
+    box-shadow: 0 0 0 4px rgba(59, 209, 255, 0.9);
+  }
+
+  &:nth-child(1) {
+    i { background-color: #26A8F1; color: white; }
+  }
+  &:nth-child(2) {
+    i { background-color: #FFC01F; color: #373737; }
+  }
+  &:nth-child(3) {
+    i { background-color: #EB56; color: white; }
+  }
+  &:nth-child(4) {
+    i { background-color: #64DF69; color: #373737; }
   }
 }
 

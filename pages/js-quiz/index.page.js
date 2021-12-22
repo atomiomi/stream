@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Head from 'next/head';
 import Quiz from './components/quiz';
+import Success from './components/success';
+import GameOver from './components/game_over';
+import Start from './components/start';
 import styles from './index.module.scss';
 
-const STEP_QUIZ = 'quiz';
+const STATE_START = 'start';
+const STATE_SUCCESS = 'success';
+const STATE_FAIL = 'error';
+const STATE_QUIZ = 'quiz';
 
 const sampleQuestions = [
   {
@@ -31,14 +37,24 @@ const sampleQuestions = [
 ];
 
 const JSQuiz = () => {
-  const [step, setStep] = useState(STEP_QUIZ);
+  const modeRef = useRef();
+  const [state, setState] = useState(STATE_START);
 
   const handleSucess = () => {
-    console.info('SUCCESS');
+    setState(STATE_SUCCESS);
   };
 
   const handleFail = () => {
-    console.info('FAILED');
+    setState(STATE_FAIL);
+  };
+
+  const handleRestart = () => {
+    setState(STATE_START);
+  };
+
+  const handleModeSelect = (mode) => {
+    modeRef.current = mode;
+    setState(STATE_QUIZ);
   };
 
   return (
@@ -58,7 +74,10 @@ const JSQuiz = () => {
       </Head>
 
       <div className={styles.content}>
-        {step === STEP_QUIZ && <Quiz questions={sampleQuestions} onSuccess={handleSucess} onFail={handleFail} />}
+        {state === STATE_START && <Start onModeSelect={handleModeSelect} />}
+        {state === STATE_QUIZ && <Quiz questions={sampleQuestions} onSuccess={handleSucess} onFail={handleFail} />}
+        {state === STATE_SUCCESS && <Success />}
+        {state === STATE_FAIL && <GameOver onRestart={handleRestart} />}
       </div>
 
       <footer className={styles.footer}>
