@@ -1,48 +1,36 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Head from 'next/head';
 import Quiz from './components/quiz';
 import Success from './components/success';
 import GameOver from './components/game_over';
 import Start from './components/start';
+import Loading from './components/loading';
 import styles from './index.module.scss';
 
+const STATE_LOADING = 'loading';
 const STATE_START = 'start';
 const STATE_SUCCESS = 'success';
 const STATE_FAIL = 'error';
 const STATE_QUIZ = 'quiz';
 
-const sampleQuestions = [
-  {
-    code: '',
-    title: 'What\'s the output?',
-    answer: 'A',
-    options: [
-      { key: 'A', value: 'Target > Capturing > Bubbling' },
-      { key: 'B', value: 'Target > Capturing > Bubbling' },
-      { key: 'C', value: 'Target > Capturing > Bubbling' },
-      { key: 'D', value: 'Target > Capturing > Bubbling' },
-    ]
-  },
-  {
-    code: '',
-    title: 'What\'s the output???',
-    answer: 'B',
-    options: [
-      { key: 'A', value: 'Capturing > Capturing > Bubbling' },
-      { key: 'B', value: 'Target > Capturing > Bubbling' },
-      { key: 'C', value: 'Target > Capturing > Bubbling' },
-      { key: 'D', value: 'Target > Capturing > Bubbling' },
-    ]
-  }
-];
-
 const JSQuiz = () => {
   const modeRef = useRef();
   const startTimeRef = useRef();
   const endTimeRef = useRef();
-  const [state, setState] = useState(STATE_START);
-
+  const [state, setState] = useState(STATE_LOADING);
+  const [questions, setQuestions] = useState(null);
   const playingTime = endTimeRef.current - startTimeRef.current;
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      const response = await fetch('/api/quiz');
+      const payload = await response.json();
+      setQuestions(payload)
+      setState(STATE_START);
+    };
+
+    fetchQuestions();
+  }, []);
 
   const handleSucess = () => {
     endTimeRef.current = Date.now();
@@ -80,8 +68,9 @@ const JSQuiz = () => {
       </Head>
 
       <div className={styles.content}>
+        {state === STATE_LOADING && <Loading />}
         {state === STATE_START && <Start onModeSelect={handleModeSelect} />}
-        {state === STATE_QUIZ && <Quiz mode={modeRef.current} questions={sampleQuestions} onSuccess={handleSucess} onFail={handleFail} />}
+        {state === STATE_QUIZ && <Quiz mode={modeRef.current} questions={questions} onSuccess={handleSucess} onFail={handleFail} />}
         {state === STATE_SUCCESS && <Success onRestart={handleRestart} time={playingTime} />}
         {state === STATE_FAIL && <GameOver onRestart={handleRestart} />}
       </div>
