@@ -5,7 +5,7 @@ import Code from './code';
 import styles from './index.module.scss';
 
 const Quiz = ({ questions, mode, onSuccess, onFail }) => {
-  const [index, setIndex] = useState(20);
+  const [index, setIndex] = useState(0);
   const question = questions[index];
 
   const handleSelect = (option) => {
