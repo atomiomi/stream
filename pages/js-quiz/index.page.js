@@ -29,7 +29,7 @@ const JSQuiz = () => {
     if (state !== STATE_LOADING) return;
 
     const fetchQuestions = async () => {
-      const src = router.query.src || 'https://download1074.mediafire.com/xvkupfq21fig/hlsv040x4ci2y4c/questions.md';
+      const src = router.query.src || 'https%3A%2F%2Fwww.atomiomi.com%2Fjs-questions.md';
       const count = router.query.count || 50;
 
       const response = await fetch(
