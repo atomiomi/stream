@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import Timer from './timer';
+import Code from './code';
 import styles from './index.module.scss';
 
 const Quiz = ({ questions, mode, onSuccess, onFail }) => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(20);
   const question = questions[index];
 
   const handleSelect = (option) => {
@@ -28,16 +30,17 @@ const Quiz = ({ questions, mode, onSuccess, onFail }) => {
       </header>
 
       <div className={styles.card}>
-        <h1 className={styles.title}>{question.title}</h1>
+        <ReactMarkdown className={styles.title}>{question.title}</ReactMarkdown>
 
         <div className={styles.code}>
+          <Code value={question.code} />
         </div>
 
         <div className={styles.list}>
           {question.options.map((option) => (
             <div key={option.key} className={styles.option} onClick={() => handleSelect(option)}>
               <i>{option.key}</i>
-              <div>{option.value}</div>
+              <ReactMarkdown>{option.value}</ReactMarkdown>
             </div>
           ))}
         </div>

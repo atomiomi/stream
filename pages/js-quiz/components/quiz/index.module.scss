@@ -1,13 +1,12 @@
 @import '~/pages/config.scss';
 
 .card {
-  margin: 0 auto;
+  margin: 0 auto 50px;
   padding: 15px;
   max-width: 550px;
   background-color: #4F4646;
   border-radius: 10px;
   box-shadow: 0px 2px 44px 10px rgba(0, 0, 0, 0.2);
-  color: #FFFFFF;
 }
 
 .title {
@@ -16,6 +15,20 @@
   margin: 0;
   color: #C5BFBF;
   text-align: center;
+
+  p {
+    margin: 0;
+  }
+
+  code {
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: #888888;
+    border-radius: 5px;
+    border: 1px solid #989898;
+    font-size: 15px;
+    color: white;
+  }
 }
 
 .code {
@@ -34,6 +47,19 @@
   border-radius: 8px;
   transition: background-color 300ms ease, box-shadow 300ms ease;
   word-break: break-all;
+
+  code {
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: #888888;
+    border-radius: 5px;
+    border: 1px solid #989898;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 0;
+  }
 
   i {
     flex-shrink: 0;
@@ -70,4 +96,5 @@
 
 .list {
   padding: 10px 0;
+  color: #FFFFFF;
 }

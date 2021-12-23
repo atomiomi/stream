@@ -25,7 +25,7 @@ const JSQuiz = () => {
     const fetchQuestions = async () => {
       const response = await fetch('/api/quiz');
       const payload = await response.json();
-      setQuestions(payload)
+      setQuestions(payload.questions)
       setState(STATE_START);
     };
 
