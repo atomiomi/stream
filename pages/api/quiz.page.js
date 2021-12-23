@@ -60,8 +60,13 @@ const rules = [
 ];
 
 const handler = async (req, res) => {
+
+
   try {
-    const response = await fetch('https://raw.githubusercontent.com/lydiahallie/javascript-questions/master/README.md');
+    const { src, count } = req.query;
+    if (!src || !count) return res.status(422).end();
+
+    const response = await fetch(src);
     let rawData = await response.text();
     rawData = rawData.replace(/^(.*?)##/s, '##');
 
@@ -83,7 +88,7 @@ const handler = async (req, res) => {
       }, {});
     });
 
-    res.json({ questions: sampleSize(questions, 50) });
+    res.json({ questions: sampleSize(questions, count) });
   } catch(err) {
     console.error('Error while loading data:', err);
     res.status(500).end();

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router'
 import Head from 'next/head';
 import Quiz from './components/quiz';
 import Success from './components/success';
@@ -14,6 +15,8 @@ const STATE_FAIL = 'error';
 const STATE_QUIZ = 'quiz';
 
 const JSQuiz = () => {
+  const router = useRouter();
+
   const modeRef = useRef();
   const startTimeRef = useRef();
   const endTimeRef = useRef();
@@ -22,10 +25,17 @@ const JSQuiz = () => {
   const playingTime = endTimeRef.current - startTimeRef.current;
 
   useEffect(() => {
+    if (!router.isReady) return;
     if (state !== STATE_LOADING) return;
 
     const fetchQuestions = async () => {
-      const response = await fetch('/api/quiz');
+      const src = router.query.src || 'https://download1074.mediafire.com/xvkupfq21fig/hlsv040x4ci2y4c/questions.md';
+      const count = router.query.count || 50;
+
+      const response = await fetch(
+        `/api/quiz?src=${encodeURIComponent(src)}&count=${encodeURIComponent(count)}`
+      );
+
       const payload = await response.json();
       setQuestions(payload.questions)
       setState(STATE_START);
@@ -33,7 +43,7 @@ const JSQuiz = () => {
 
     setQuestions([]);
     fetchQuestions();
-  }, [state]);
+  }, [state, router]);
 
   const handleSucess = () => {
     endTimeRef.current = Date.now();
