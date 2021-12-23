@@ -12,6 +12,7 @@
 .title {
   font-size: 18px;
   font-weight: $font-sans-weight-m;
+  line-height: 28px;
   margin: 0;
   color: #C5BFBF;
   text-align: center;
@@ -22,11 +23,12 @@
 
   code {
     display: inline-block;
-    padding: 2px 4px;
+    padding: 0 4px;
     background-color: #888888;
     border-radius: 5px;
     border: 1px solid #989898;
     font-size: 15px;
+    line-height:18px;
     color: white;
   }
 }
@@ -43,19 +45,21 @@
   display: flex;
   align-items: center;
   margin-top: 13px;
-  padding: 5px;
+  padding: 3px 5px;
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 300ms ease, box-shadow 300ms ease;
   word-break: break-all;
+  line-height: 25px;
 
   code {
     display: inline-block;
-    padding: 2px 4px;
+    padding: 0 4px;
     background-color: #888888;
     border-radius: 5px;
     border: 1px solid #989898;
     font-size: 14px;
+    line-height:18px;
   }
 
   p {

@@ -32,9 +32,11 @@ const Quiz = ({ questions, mode, onSuccess, onFail }) => {
       <div className={styles.card}>
         <ReactMarkdown className={styles.title}>{question.title}</ReactMarkdown>
 
-        <div className={styles.code}>
-          <Code value={question.code} />
-        </div>
+        {question.code && (
+          <div className={styles.code}>
+            <Code value={question.code} />
+          </div>
+        )}
 
         <div className={styles.list}>
           {question.options.map((option) => (
