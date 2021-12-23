@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 
 const modes = [
-  { name: 'Easy', questionTime: 1000 * 60 * 5 },
+  { name: 'Easy', questionTime: 1000 * 60 * 4 },
   { name: 'Normal', questionTime: 1000 * 60 * 2 },
   { name: 'Hard', questionTime: 1000 * 60 * 0.6 },
   { name: 'Asian', questionTime: 1000 * 60 * 0.3 },
