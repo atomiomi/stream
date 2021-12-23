@@ -26,6 +26,7 @@ const Quiz = ({ questions, mode, onSuccess, onFail }) => {
       `}</style>
 
       <header>
+        <div className={styles.counter}>Question: {index + 1}/{questions.length}</div>
         <Timer time={mode.questionTime} onEnd={onFail} />
       </header>
 
