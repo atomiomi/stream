@@ -18,10 +18,12 @@ const JSQuiz = () => {
   const startTimeRef = useRef();
   const endTimeRef = useRef();
   const [state, setState] = useState(STATE_LOADING);
-  const [questions, setQuestions] = useState(null);
+  const [questions, setQuestions] = useState([]);
   const playingTime = endTimeRef.current - startTimeRef.current;
 
   useEffect(() => {
+    if (state !== STATE_LOADING) return;
+
     const fetchQuestions = async () => {
       const response = await fetch('/api/quiz');
       const payload = await response.json();
@@ -29,8 +31,9 @@ const JSQuiz = () => {
       setState(STATE_START);
     };
 
+    setQuestions([]);
     fetchQuestions();
-  }, []);
+  }, [state]);
 
   const handleSucess = () => {
     endTimeRef.current = Date.now();
@@ -42,7 +45,7 @@ const JSQuiz = () => {
   };
 
   const handleRestart = () => {
-    setState(STATE_START);
+    setState(STATE_LOADING);
   };
 
   const handleModeSelect = (mode) => {
